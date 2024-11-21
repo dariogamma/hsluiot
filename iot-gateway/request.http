@@ -4,6 +4,6 @@ Content-Type: application/json
 
 {
   "temperature": 25.5,
-  "id": "sensor-001",
+  "id": 1,
   "humidity": 60
 }
