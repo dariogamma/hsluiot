@@ -1,0 +1,9 @@
+### Sende Daten an die API
+POST http://localhost:5000/data
+Content-Type: application/json
+
+{
+  "temperature": 25.5,
+  "id": "sensor-001",
+  "humidity": 60
+}
