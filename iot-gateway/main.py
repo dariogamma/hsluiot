@@ -11,7 +11,7 @@ IOT_HUB_CONNECTION_STRING = os.getenv("IOT_HUB_CONNECTION_STRING")
 # IoT-Client initialisieren
 iot_client = IoTHubDeviceClient.create_from_connection_string(IOT_HUB_CONNECTION_STRING)
 
-@app.route('/send-data', methods=['POST'])
+@app.route('/data', methods=['POST'])
 def send_data_to_iot_hub():
     try:
         # JSON-Daten aus der Anfrage lesen
