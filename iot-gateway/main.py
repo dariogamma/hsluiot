@@ -19,6 +19,7 @@ def send_data_to_iot_hub():
         
         # Erwartete Felder prüfen
         if not all(k in data for k in ("temperature", "id", "humidity")):
+            print(data)
             return jsonify({"error": "Missing one or more required fields: 'temperature', 'id', 'humidity'"}), 400
         
         # Daten auslesen
