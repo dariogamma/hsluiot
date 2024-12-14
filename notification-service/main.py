@@ -14,7 +14,7 @@ PASSWORD = os.getenv("SMTP_PASSWORD")  # Replace with your Gmail app password
 alert = GmailAlert(SMTP_SERVER, SMTP_PORT, EMAIL, PASSWORD)
 
 @app.route('/notify', methods=['POST'])
-def send_data_to_iot_hub():
+def send_notification():
     try:
         # JSON-Daten aus der Anfrage lesen
         data = request.json
