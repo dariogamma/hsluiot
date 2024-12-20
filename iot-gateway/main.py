@@ -1,5 +1,6 @@
 from flask import Flask, request, jsonify
 from azure.iot.device import IoTHubDeviceClient, Message
+import requests
 import os
 
 # Flask-App initialisieren
@@ -7,6 +8,9 @@ app = Flask(__name__)
 
 # IoT Hub Verbindungseinstellungen
 IOT_HUB_CONNECTION_STRING = os.getenv("IOT_HUB_CONNECTION_STRING")
+THRESHOLD_TEMPERATURE = os.getenv("THRESHOLD_TEMPERATURE")
+THRESHOLD_HUMIDITY = os.getenv("THRESHOLD_HUMIDITY")
+NOTIFICATION_SERVICE_URL = 'http://localhost:5001/notify'
 
 # IoT-Client initialisieren
 iot_client = IoTHubDeviceClient.create_from_connection_string(IOT_HUB_CONNECTION_STRING)
@@ -27,6 +31,21 @@ def send_data_to_iot_hub():
         device_id = data['id']
         humidity = data['humidity']
         
+        if temperature >= THRESHOLD_TEMPERATURE or humidity >= THRESHOLD_HUMIDITY:
+            print(f'Send alert: temp. {temperature} / humi. {humidity}')
+            try:
+                # POST-Request senden
+                headers = { "Content-Type": "application/json" }
+                response = requests.post(NOTIFICATION_SERVICE_URL, json=data, headers=headers)
+
+                # Antwort prüfen
+                if response.status_code == 200:
+                    print("User notified successfully:", response.json())
+                else:
+                    print("Error sending notification:", response.status_code, response.json())
+            except requests.exceptions.RequestException as e:
+                print("Error sending notification:", e)
+        
         # IoT-Hub Nachricht vorbereiten
         iot_message = {
             "deviceId": device_id,
@@ -44,4 +63,4 @@ def send_data_to_iot_hub():
 
 # Flask-Server starten
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(host='0.0.0.0', port=5001)
