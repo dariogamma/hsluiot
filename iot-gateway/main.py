@@ -50,7 +50,7 @@ def send_data_to_iot_hub():
         iot_message = {
             "deviceId": device_id,
             "temperature": temperature,
-            "humidity": humidity
+            "humidity": int(humidity)
         }
         
         # Nachricht senden
