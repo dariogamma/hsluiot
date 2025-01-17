@@ -30,6 +30,8 @@ def send_data_to_iot_hub():
         temperature = data['temperature']
         device_id = data['id']
         humidity = data['humidity']
+
+        print(str(data['id']) + str(data['humidity']) + str(data['temperature']))
         
         if float(temperature) >= float(THRESHOLD_TEMPERATURE) or float(humidity) >= float(THRESHOLD_HUMIDITY):
             print(f'Send alert: temp. {temperature} / humi. {humidity}')
