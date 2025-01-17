@@ -28,7 +28,7 @@ def send_notification():
         result = alert.send_email(
             recipient_email="vxw18543@msssg.com",
             subject="WATER ALERT",
-            body= f'Sensor {data['id']} detected temperature of {data['temperature']} and humidity of {data['humidity']}'
+            body= f"Sensor {data['id']} detected temperature of {data['temperature']} and humidity of {data['humidity']}"
         )
 
         print(result)
