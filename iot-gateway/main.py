@@ -59,6 +59,7 @@ def send_data_to_iot_hub():
         
         return jsonify({"status": "success", "message": "Data sent to IoT Hub"}), 200
     except Exception as e:
+        print(str(e))
         return jsonify({"error": str(e)}), 500
 
 # Flask-Server starten
