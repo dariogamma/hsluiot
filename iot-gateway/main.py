@@ -10,7 +10,7 @@ app = Flask(__name__)
 IOT_HUB_CONNECTION_STRING = os.getenv("IOT_HUB_CONNECTION_STRING")
 THRESHOLD_TEMPERATURE = os.getenv("THRESHOLD_TEMPERATURE")
 THRESHOLD_HUMIDITY = os.getenv("THRESHOLD_HUMIDITY")
-NOTIFICATION_SERVICE_URL = 'http://localhost:5001/notify'
+NOTIFICATION_SERVICE_URL = 'http://localhost:5000/notify'
 
 # IoT-Client initialisieren
 iot_client = IoTHubDeviceClient.create_from_connection_string(IOT_HUB_CONNECTION_STRING)
